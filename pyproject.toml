@@ -1,0 +1,18 @@
+[project]
+name = "task-tracker"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Artem Savchenko",email = "artemsavchenko095@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django (>=6.0.2,<7.0.0)",
+    "psycopg[binary] (>=3.3.2,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
