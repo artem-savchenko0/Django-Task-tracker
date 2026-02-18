@@ -3,7 +3,7 @@ name = "task-tracker"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Artem Savchenko",email =}
+    {name = "Artem Savchenko"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
