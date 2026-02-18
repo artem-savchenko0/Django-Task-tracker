@@ -4,7 +4,7 @@ A simple Django project for managing tasks.
 
 ## Description
 
-Task Tracker allows you to create, edit, and track tasks. Perfect for learning Django and PostgreSQL.
+Task Tracker allows you to create, edit, and track tasks. Perfect
 
 ## Installation
 
