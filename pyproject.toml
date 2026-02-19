@@ -1,17 +1,17 @@
-[project]
-name = "django-task-tracker"
+[tool.poetry]
+name = "task_tracker"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Artem Savchenko"}
-]
+authors = ["Artem Savchenko"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "django (>=6.0.2,<7.0.0)",
-    "psycopg[binary] (>=3.3.2,<4.0.0)"
-]
+packages = [{ include = "task_tracker" }]
 
+[tool.poetry.dependencies]
+python = ">=3.12"
+django = ">=6.0.2,<7.0.0"
+psycopg = { extras = ["binary"], version = ">=3.3.2,<4.0.0" }
+djangorestframework = ">=3.16.1,<4.0.0"
+django-cors-headers = ">=4.9.0,<5.0.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
