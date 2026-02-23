@@ -20,23 +20,29 @@ class Task(models.Model):
     description = models.TextField(blank=True)
 
     status = models.CharField(
-        max_length=20,
-        choices=Status.choices,
-        default=Status.TODO,
+        max_length = 20,
+        choices = Status.choices,
+        default = Status.TODO,
+        db_index = True
     )
 
     priority = models.IntegerField(
-        choices=Priority.choices,
-        default=Priority.MEDIUM,
+        choices = Priority.choices,
+        default = Priority.MEDIUM,
+        db_index = True
     )
 
     user = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
-        related_name="tasks",
+        on_delete = models.CASCADE,
+        related_name = "tasks",
+        db_index = True
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add = True, db_index = True)
+
+    class Meta:
+        ordering = ["-created_at"]
 
     def __str__(self):
-        return self.title
+        return F"[{self.get_status_display()}] {self.title}"
