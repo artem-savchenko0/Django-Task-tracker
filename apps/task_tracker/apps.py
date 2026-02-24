@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class TasksConfig(AppConfig):
+class TaskTrackerConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "task_tracker.apps.tasks"
-
+    name = "apps.task_tracker"
