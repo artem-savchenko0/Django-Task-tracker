@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model 
 
 User = get_user_model()
 
@@ -16,17 +16,17 @@ class Task(models.Model):
         MEDIUM = 2, "Medium"
         HIGH = 3, "High"
 
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
+    title= models.CharField(max_length=255)
+    description= models.TextField(blank=True)
 
-    status = models.CharField(
-        max_length = 20,
-        choices = Status.choices,
-        default = Status.TODO,
-        db_index = True
+    status =models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.TODO,
+        db_index=True
     )
 
-    priority = models.IntegerField(
+    priority= models.IntegerField(
         choices = Priority.choices,
         default = Priority.MEDIUM,
         db_index = True
@@ -45,4 +45,4 @@ class Task(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return F"[{self.get_status_display()}] {self.title}"
+        return f"[{self.get_status_display()}] {self.title}"
