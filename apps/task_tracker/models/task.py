@@ -1,10 +1,12 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model 
+from apps.task_tracker.querysets import TaskQuerySet
 
 User = get_user_model()
 
 
 class Task(models.Model):
+    object = TaskQuerySet.as_manager()
 
     class Status(models.TextChoices):
         TODO = "todo", "To Do"
@@ -16,14 +18,14 @@ class Task(models.Model):
         MEDIUM = 2, "Medium"
         HIGH = 3, "High"
 
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=60)
     description = models.TextField(blank=True)
 
     status = models.CharField(
-        max_length = 20,
-        choices = Status.choices,
-        default = Status.TODO,
-        db_index = True
+        max_length=20,
+        choices=Status.choices,
+        default=Status.TODO,
+        db_index=True
     )
 
     priority = models.IntegerField(
@@ -45,4 +47,4 @@ class Task(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return F"[{self.get_status_display()}] {self.title}"
+        return f"[{self.get_status_display()}] {self.title}"
