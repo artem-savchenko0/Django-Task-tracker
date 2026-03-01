@@ -16,20 +16,20 @@ def create_task(*, user: User, title: str, description: str = "", priority: int)
 	task.save()
 	return task 
 
-def change_status(*, task: Task, status: str) -> Task:
+def change_status(*, task: Task, status: Task.Status) -> Task:
 	task.status = status
 	task.full_clean()
 	task.save(update_fields=["status"])
 	return task
 
-def set_priority(*, task: Task, priority: int) -> Task:
+def set_priority(*, task: Task, priority: Task.Priority) -> Task:
 	task.priority = priority
 	task.full_clean()
 	task.save(update_fields=["priority"])
 	return task
 
 def set_deadline(*, task: Task, deadline: datetime | None) -> Task:
-	if deadline is None and deadline < timezone.now():
+	if deadline is not None and deadline < timezone.now():
 		raise ValueError("Deadline cannot be in the past")
 	
 	task.deadline = deadline
