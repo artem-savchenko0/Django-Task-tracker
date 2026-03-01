@@ -19,3 +19,9 @@ def change_status(*, task: Task, status: str) -> Task:
 	task.full_clean()
 	task.save(update_fields=["status"])
 	return task
+
+def set_priority(*, task: Task, priority: int) -> Task:
+	task.priority = priority
+	task.full_clean()
+	task.save(update_fields=["property"])
+	return task
