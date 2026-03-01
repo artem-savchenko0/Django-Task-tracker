@@ -47,5 +47,5 @@ class Task(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"[{self.get_status_display()}] {self.title}"
