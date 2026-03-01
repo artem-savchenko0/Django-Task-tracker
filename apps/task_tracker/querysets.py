@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -16,3 +17,9 @@ class TaskQuerySet(models.QuerySet):
 
     def done(self) -> "TaskQuerySet":
         return self.filter(status=self.model.Status.DONE)
+    
+    def overdue(self) -> "TaskQuerySet":
+        return self.filter(
+            deadline__isnull=False, 
+            deadline__lt=timezone.now(),
+            )

@@ -1,3 +1,5 @@
+from datetime import datetime
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from .models import Task
 
@@ -24,4 +26,13 @@ def set_priority(*, task: Task, priority: int) -> Task:
 	task.priority = priority
 	task.full_clean()
 	task.save(update_fields=["priority"])
+	return task
+
+def set_deadline(*, task: Task, deadline: datetime | None) -> Task:
+	if deadline is None and deadline < timezone.now():
+		raise ValueError("Deadline cannot be in the past")
+	
+	task.deadline = deadline
+	task.full_clean()
+	task.save(update_fields=["deadline"])
 	return task
