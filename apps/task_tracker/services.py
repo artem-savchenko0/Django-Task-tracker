@@ -13,3 +13,10 @@ def create_task(*, user: User, title: str, description: str = "", priority: int)
 	task.full_clean()
 	task.save()
 	return task 
+
+def change_status(*, task: Task, status: str) -> Task:
+	task.status = status
+	task.full_clean()
+	task.save(update_fields=["status"])
+	return task
+
