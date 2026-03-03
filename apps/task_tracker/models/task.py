@@ -50,18 +50,15 @@ class Task(models.Model):
     def clean(self):
         super().clean()
         self._validate_deadline()
-        self._validate_done_rules()
+        self._validate_status_rules()
 
     def _validate_deadline(self):
         if self.deadline and self.deadline < timezone.now():
             raise ValidationError({"deadline": "Deadline cannot be in the past"})
         
-    def _validate_done_rules(self):
-        if self.status == self.Status.DONE:
-            if not self.description:
+    def _validate_status_rules(self):
+        if self.status == self.Status.DONE and not self.description:
                 raise ValidationError({"description": "Description required to complete Task"})
-            if self.status == self.Status.TODO:
-                raise ValidationError({"status": "Task must be in progress before completion"})
 
     def __str__(self) -> str:
         return f"[{self.get_status_display()}] {self.title}"
