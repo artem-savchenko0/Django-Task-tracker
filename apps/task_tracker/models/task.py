@@ -48,16 +48,16 @@ class Task(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
-    def clean(self):
+    def clean(self) -> None:
         super().clean()
         self._validate_deadline()
         self._validate_status_rules()
 
-    def _validate_deadline(self):
+    def _validate_deadline(self) -> None:
         if self.deadline and self.deadline < timezone.now():
             raise ValidationError({"deadline": "Deadline cannot be in the past"})
         
-    def _validate_status_rules(self):
+    def _validate_status_rules(self) -> None:
         if self.status == self.Status.DONE and not self.description:
                 raise ValidationError({"description": "Description required to complete Task"})
 
