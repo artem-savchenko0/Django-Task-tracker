@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 
 User = get_user_model()
+
+
 class TaskQuerySet(models.QuerySet):
     def for_user(self, user: User) -> "TaskQuerySet":
         return self.filter(user=user)
